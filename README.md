@@ -1,66 +1,255 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+URL Shortener
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A Laravel-based URL Shortener application that allows users to generate short URLs, track URL hits, and manage generated URLs based on user roles and permissions.
 
-## About Laravel
+Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Generate short URLs from long URLs
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Redirect short URLs to the original URL
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Track the number of URL hits
 
-## Learning Laravel
+Role-based access control
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Superadmin, Admin, and Member dashboards
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Client/company management
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Team member management
 
-## Laravel Sponsors
+Generated URL management
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Edit and delete generated URLs
 
-### Premium Partners
+Filter generated URLs by date
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Download generated URL listings as PDF
 
-## Contributing
+Pagination for URL listings
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Permission-based actions
 
-## Code of Conduct
+---------------------------------------------------------------------------------------
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Requirements
 
-## Security Vulnerabilities
+PHP: 8.2 or higher
+Composer version: 2.10.3
+database: MySQL
+Node.js / NPM vresion: 9.5.1
+Laravel version: ^11.31
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-------------------------------------------------------------------------------------
 
-## License
+Installation
+1. Clone the repository
+git clone https://github.com/mangilalyadav/laravel-url-shortener.git
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. Go to the project directory
+cd laravel-url-shortener
+
+3. Install PHP dependencies
+composer install
+
+4. Install frontend dependencies
+npm install
+
+5. Create the environment file
+
+Copy .env.example to .env.
+
+On Windows:
+
+copy .env.example .env
+
+
+On Linux/macOS:
+
+cp .env.example .env
+
+6. Configure the database
+
+Open the .env file and configure your MySQL database:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=url_shortener
+DB_USERNAME=root
+DB_PASSWORD=
+
+Use your own local database credentials.
+
+
+7. Generate the application key
+php artisan key:generate
+
+8. Run migrations
+php artisan migrate
+
+9. Run database seeders
+
+Run seeders for roles, permissions, or initial users, run:
+
+php artisan db:seed
+
+10. Start the Laravel application
+php artisan serve
+
+
+The application will be available at:
+
+http://127.0.0.1:8000/admin/auth/login
+
+URL Shortening
+
+After logging in, authorized users can generate a short URL by providing a valid long URL.
+
+
+The application redirects the visitor to the original long URL and increments the URL hit count.
+------------------------------------------------------
+User Roles
+
+The application supports different user roles with different access levels:
+-------------------------------------------------------------------------------
+Superadmin
+
+Manage clients
+
+View generated URLs across clients
+
+View team/user information
+
+Manage generated URLs
+
+Download generated URL reports
+
+---------------------------------------------------------------------
+
+Admin
+
+Generate short URLs
+
+View URLs belonging to their client/company
+
+Manage team members
+
+View URL statistics
+
+Download filtered URL reports
+
+Member
+
+Generate short URLs
+
+View their available generated URLs
+
+View URL hit counts
+
+Manage URLs according to assigned permissions
+
+PDF Reports
+
+Authorized users can download generated URL listings as PDF reports.
+
+Available date filters include:
+
+Today
+
+Last Week
+
+This Month
+
+Last Month
+
+The downloaded report contains information such as:
+
+Short URL
+
+Long URL
+
+Created By
+
+Company
+
+Hits
+
+Created At
+
+---------------------------------------------------------------------------------
+Member user role
+
+Generate short URLs
+
+View URLs belonging to their client/company
+
+Manage team members
+
+View URL statistics
+
+Download filtered URL reports
+
+Member
+
+Generate short URLs
+
+View their available generated URLs
+
+View URL hit counts
+
+Manage URLs according to assigned permissions
+
+PDF Reports
+
+--------------------------------------------------------------------------------------------------------
+
+Project Structure
+
+The main Laravel directories used by this project include:
+
+app/
+├── Http/
+├── Models/
+└── ...
+
+database/
+├── migrations/
+└── seeders/
+
+resources/
+├── views/
+└── ...
+
+routes/
+└── web.php
+
+public/
+
+
+------------------------------------------------------------------------------------------
+YOU CAN EASILY ACCESS THE ASSIGNMENT AN SHARE THE DATABASE EXPORT FILE ALSO.
+
+CREDENTIALS:
+SUPERADMIN USER : 
+U: demo.super@gmail.com
+P: 12345678
+
+ADMIN USER:
+U: demo.admin@gmail.com
+P: password
+
+MEMBER USER:
+U: demo.member@gmail.com
+P: password
+
+
+Database backup: attached with mail
+
+
+
+
+-------------------------------------------------------------------------------------------
+AI Tool Used: chatgpt(for create the logo of the project for the admin panel).
+
+
