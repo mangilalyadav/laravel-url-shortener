@@ -113,21 +113,30 @@ class UserController extends Controller
 
         try {
 
+             $authUser = auth()->user();
+            $clientId = null;
+
             $authUser = auth()->user();
-            $client = $authUser->client;
-            if (!$client) {
-                return back()
-                    ->withInput()
-                    ->withErrors([
-                        'client' => 'You are not assigned to any client.',
-                    ]);
+
+            if ($authUser->hasRole('admin')) {
+                $client = $authUser->client;
+
+                if (!$client) {
+                    return back()
+                        ->withInput()
+                        ->withErrors([
+                            'client' => 'You are not assigned to any client.',
+                        ]);
+                }
+                $clientId = $client->id;
             }
+
 
             $role = Role::findOrFail($request->role_id);
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'client_id' => $client->id,
+                'client_id' =>  $clientId,
                 'password' => Hash::make('12345678'),
             ]);
 

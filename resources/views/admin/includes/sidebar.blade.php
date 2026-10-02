@@ -54,7 +54,7 @@
                 @endrole
 
                 <!-- its_palakk04 -->
-                @role('admin')
+                @role(['superadmin', 'admin'])
                 <div class="menu-item ">
                     <!--begin:Menu link-->
                     <a class="menu-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}"
