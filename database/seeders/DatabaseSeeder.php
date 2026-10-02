@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
      */
    public function run(): void
     {
-        $superAdminRole = Role::firstOrCreate(['name' => 'superAdmin'], ['name' => 'superAdmin', 'display_name' => 'Super Admin']);
+        $superAdminRole = Role::firstOrCreate(['name' => 'superadmin'], ['name' => 'superadmin', 'display_name' => 'Super Admin']);
         $adminRole = Role::firstOrCreate(['name' => 'admin'], ['name' => 'admin', 'display_name' => 'Admin']);
         $memberRole = Role::firstOrCreate(['name' => 'member'], ['name' => 'member', 'display_name' => 'Member']);
         
-        $superAdminRole = User::firstOrCreate(
+        $superAdminUser = User::firstOrCreate(
             [ 'email' => 'demo.super@gmail.com' ],
             [
                 'name'    => 'DemoSuper',
@@ -85,6 +85,6 @@ class DatabaseSeeder extends Seeder
 
         //Assign all permission to the developer
         $superAdminRole->syncPermissions($permissions);
-        $superAdminRole->assignRole([$superAdminRole->id]);
+        $superAdminUser->assignRole([$superAdminRole->id]);
     }
 }
